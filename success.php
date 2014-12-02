@@ -2,7 +2,7 @@
 require_once "new.php";
 
 session_start ();
-header('Refresh: 5; URL=http://localhost:8080/teht1/index.php');
+header('Refresh: 5; URL=index.php');
 ?>
 
 <!DOCTYPE html>
