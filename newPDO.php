@@ -5,7 +5,7 @@ class newPDO {
 	private $count;
 	function __construct($dsn = "mysql:host=localhost;dbname=spottings", $username = "root", $password = "salainen") {
 		// Connect to db
-		$this->db = new PDO ( $dsn, $username, $passwordd );
+		$this->db = new PDO ( $dsn, $username, $password );
 		
 		// Debug errors
 		$this->db->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
@@ -18,7 +18,7 @@ class newPDO {
 		return $this->count;
 	}
 	public function allSpottings() {
-		$sql = "SELECT spotting_id, name, where, specialCharacteristics, role, language, whatHappend
+		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
 				FROM spotting";
 		
 		// Prepare statement
@@ -41,9 +41,9 @@ class newPDO {
 			// Create object from result
 			$new = new newSpotting ();
 			
-			$new->setSpottingId ( $row->spotting_id );
+			$new->setspottingId ( $row->spotting_id );
 			$new->setName ( utf8_encode ( $row->name ) );
-			$new->setWhere ( utf8_encode ( $row->where ) );
+			$new->setwhereItHappend ( utf8_encode ( $row->whereItHappend ) );
 			$new->setSpecialCharacteristics ( $row->specialCharacteristics );
 			$new->setLanguage ( $row->language );
 			$new->setWhatHappend ( utf8_encode ( $row->whatHappend ) );
@@ -57,7 +57,7 @@ class newPDO {
 		return $result;
 	}
 	public function getAll($name) {
-		$sql = "SELECT spotting_id, name, where, specialCharacteristics, role, language, whatHappend
+		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
 				FROM spotting
 				WHERE name like :name";
 		// Prepare statement
@@ -67,7 +67,6 @@ class newPDO {
 		}
 		
 		// Bind parameters
-		
 		$na = "%" . utf8_decode ( $name ) . "%";
 		$statement->bindValue ( ":name", $na, PDO::PARAM_STR );
 		
@@ -90,7 +89,7 @@ class newPDO {
 			
 			$new->setSpottingId ( $row->spotting_id );
 			$new->setName ( utf8_encode ( $row->name ) );
-			$new->setWhere ( utf8_encode ( $row->where ) );
+			$new->setwhereItHappend ( utf8_encode ( $row->whereItHappend ) );
 			$new->setSpecialCharacteristics ( utf8_encode ( $row->specialCharacteristics ) );
 			$new->setLanguage ( utf8_encode ( $row->language ) );
 			$new->setWhatHappend ( utf8_encode ( $row->whatHappend ) );
@@ -104,8 +103,8 @@ class newPDO {
 		return $result;
 	}
 	function addSpotting($new) {
-		$sql = "INSERT INTO spotting (name, where, specialCharacteristics, role, language, whatHappend)
-		        values (:name, :where, :specialCharacteristics, :role, :language, :whatHappend)";
+		$sql = "INSERT INTO spotting (name, whereItHappend, specialCharacteristics, role, language, whatHappend)
+		        values (:name, :whereItHappend, :specialCharacteristics, :role, :language, :whatHappend)";
 		
 		// Prepare statement
 		if (! $statement = $this->db->prepare ( $sql )) {
@@ -115,11 +114,11 @@ class newPDO {
 		
 		// Bind parameters
 		$statement->bindValue ( ":name", utf8_decode ( $new->getName () ), PDO::PARAM_STR );
-		$statement->bindValue ( "where", utf8_decode ( $new->getWhere () ), PDO::PARAM_STR );
-		$statement->bindValue ( "specialCharacteristics", utf8_decode ( $new->getSpecialCharacteristics () ), PDO::PARAM_STR );
-		$statement->bindValue ( "role", utf8_decode ( $new->getRole () ), PDO::PARAM_STR );
-		$statement->bindValue ( "language", utf8_decode ( $new->getLanguage () ), PDO::PARAM_STR );
-		$statement->bindValue ( "whatHappend", utf8_decode ( $new->getWhatHappend () ), PDO::PARAM_STR );
+		$statement->bindValue ( ":whereItHappend", utf8_decode ( $new->getwhereItHappend () ), PDO::PARAM_STR );
+		$statement->bindValue ( ":specialCharacteristics", utf8_decode ( $new->getSpecialCharacteristics () ), PDO::PARAM_STR );
+		$statement->bindValue ( ":role", utf8_decode ( $new->getRole () ), PDO::PARAM_STR );
+		$statement->bindValue ( ":language", utf8_decode ( $new->getLanguage () ), PDO::PARAM_STR );
+		$statement->bindValue ( ":whatHappend", utf8_decode ( $new->getWhatHappend () ), PDO::PARAM_STR );
 		
 		// Run INSERT
 		if (! $statement->execute ()) {

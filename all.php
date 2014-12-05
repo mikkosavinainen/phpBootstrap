@@ -35,9 +35,29 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Coming soon</h1>
-			<p>Other assignment</p>
+			<h1>Work in progress</h1>
+			<?php
+				try {
+					require_once 'newPDO.php';
+					
+					$sqlHandling = new newPDO();
+					$rows = $sqlHandling->allSpottings();
+					
+					foreach ($rows as $spotting) {
+						print ("<p>Name: " . $spotting->getName());
+						print ("<br>Where: " . $spotting->getwhereItHappend());
+						print ("<br>Role: " . $spotting->getRole());
+						print ("<br>What Happend: " . $spotting->getWhatHappend());
+						print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
+						print ("<br>Language: " . $spotting->getLanguage() . "</p>\n");
+					}
+					
+				} catch (Exception $e) {
+					header("location: error.php?page=listing&error=" . $e->getMessage());
+					exit();
+				}
 
+			?>
 		</div>
 	</div>
 

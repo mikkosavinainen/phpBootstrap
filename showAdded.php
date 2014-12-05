@@ -76,7 +76,7 @@ if (isset ( $_POST ["submit"] )) {
 
 					<div class="form-group">
 						<label>Where did you meet?</label>
-				<?php print(htmlentities($new->getWhere(), ENT_QUOTES, "UTF-8"));?>
+				<?php print(htmlentities($new->getwhereItHappend(), ENT_QUOTES, "UTF-8"));?>
 
 			</div>
 					<div class="form-group">

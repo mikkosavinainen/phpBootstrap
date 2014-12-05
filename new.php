@@ -32,18 +32,20 @@ class newSpotting {
 		return self::$errorList [- 1];
 	}
 	private $name;
-	private $where;
+	private $whereItHappend;
 	private $specialCharacteristics;
 	private $role;
 	private $language;
 	private $whatHappend;
-	function __construct($name = "", $where = "", $specialCharacteristics = "", $role = "", $language = "", $whatHappend = "") {
+	private $spottingId; // Added because of database
+	function __construct($name = "", $whereItHappend = "", $specialCharacteristics = "", $role = "", $language = "", $whatHappend = "", $spottingId = 0) {
 		$this->name = trim ( $name );
-		$this->where = trim ( $where );
+		$this->whereItHappend = trim ( $whereItHappend );
 		$this->specialCharacteristics = trim ( $specialCharacteristics );
 		$this->role = $role;
 		$this->language = trim ( $language );
 		$this->whatHappend = trim ( $whatHappend );
+		$this->spottingId = $spottingId;
 	}
 	public function setName($name) {
 		$this->name = trim ( $name );
@@ -66,26 +68,26 @@ class newSpotting {
 		
 		return 0;
 	}
-	public function setWhere($where) {
-		$this->where = trim ( $where );
+	public function setwhereItHappend($whereItHappend) {
+		$this->whereItHappend = trim ( $whereItHappend );
 	}
-	public function getWhere() {
-		return $this->where;
+	public function getwhereItHappend() {
+		return $this->whereItHappend;
 	}
-	public function checkWhere($required = true, $min = 3, $max = 50) {
-		if ($required == false && strlen ( $this->where ) == 0)
+	public function checkwhereItHappend($required = true, $min = 3, $max = 50) {
+		if ($required == false && strlen ( $this->whereItHappend ) == 0)
 			return 0;
 		
-		if ($required == true && strlen ( $this->where ) == 0)
+		if ($required == true && strlen ( $this->whereItHappend ) == 0)
 			return 20;
 		
-		if (strlen ( $this->where ) < $min)
+		if (strlen ( $this->whereItHappend ) < $min)
 			return 22;
 		
-		if (strlen ( $this->where ) > $max)
+		if (strlen ( $this->whereItHappend ) > $max)
 			return 23;
 		
-		if (preg_match ( "/[^a-zA-Z\- ]/", $this->where ))
+		if (preg_match ( "/[^a-zA-Z\- ]/", $this->whereItHappend ))
 			return 21;
 		
 		return 0;
@@ -170,6 +172,13 @@ class newSpotting {
 			return 33;
 		
 		return 0;
+	}
+	public function setspottingId($spottingId) {
+		$this->spottingId = $spottingId;
+	}
+	
+	public function getspottingId() {
+		return $this->spottingId;
 	}
 }
 

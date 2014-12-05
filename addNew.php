@@ -4,7 +4,7 @@ require_once 'new.php';
 session_start ();
 
 if (isset ( $_POST ["next"] )) {
-	$new = new newSpotting ( $_POST ["name"], $_POST ["where"], $_POST ["specialCharacteristics"], $_POST ["role"], $_POST ["language"], $_POST ["whatHappend"] );
+	$new = new newSpotting ( $_POST ["name"], $_POST ["whereItHappend"], $_POST ["specialCharacteristics"], $_POST ["role"], $_POST ["language"], $_POST ["whatHappend"] );
 	
 	
 	// print_r ( $new ); //debuginfo oliosta
@@ -12,21 +12,35 @@ if (isset ( $_POST ["next"] )) {
 
 	
 	$nameError = $new->checkName ();
-	$whereError = $new->checkWhere ();
+	$whereItHappendError = $new->checkWhereItHappend ();
 	$specialCharacteristicsError = $new->checkSpecialCharacteristics ();
 	$role = $new->checkRole ();
 	$languageError = $new->checkLanguage ();
 	$whatHappendError = $new->checkWhatHappend ();
 	
-	
-	// Jos ei ole virheitÃ¤ lÃ¤hdetÃ¤Ã¤n nÃ¤yttÃ¤mÃ¤Ã¤n tiedot toisella sivulla
-	if ($nameError == 0 && $whereError == 0 && $specialCharacteristicsError == 0 && $whatHappendError == 0) {
+	if ($nameError == 0 && $whereItHappendError == 0 && $specialCharacteristicsError == 0 && $whatHappendError == 0) {
+		
+		try {
+			require_once 'newPDO.php';
+			$databaseHandling = new newPDO();
+			$id = $databaseHandling->addSpotting($new);
+			
+			// Set id from session to add id
+			$_SESSION["addingNew"]->setspottingId($id);
+			
+		} catch (Exception $e) {
+			session_write_close();
+			
+			// Redirect to error page with error message
+			header("location: error.php?page=" . urlencode("Adding") . "&error" . $e->getMessage() );
+			exit();
+		}
 	
 		session_write_close ();
 		header("location: showAdded.php");
 		exit ();
 	}
-	
+
 	
 	
 } elseif (isset ( $_POST ["cancel"] )) {
@@ -39,7 +53,7 @@ if (isset ( $_POST ["next"] )) {
 		$new = $_SESSION["addingNew"];
 		
 		$nameError = $new->checkName ();
-		$whereError = $new->checkWhere ();
+		$whereItHappendError = $new->checkwhereItHappend ();
 		$specialCharacteristicsError = $new->checkSpecialCharacteristics ();
 		$role = $new->checkRole ();
 		$languageError = $new->checkLanguage ();
@@ -49,7 +63,7 @@ if (isset ( $_POST ["next"] )) {
 	} else {
 		$new = new newSpotting ();
 		$nameError = 0;
-		$whereError = 0;
+		$whereItHappendError = 0;
 		$specialCharacteristicsError = 0;
 		$role = 0;
 		$languageError = 0;
@@ -123,11 +137,11 @@ if (isset ( $_POST ["next"] )) {
 			</div>
 
 			<div class="form-group">
-				<label>Where did you meet?</label> <span class="pun"><?php print ($new->getError($whereError));?></span>
+				<label>Where did you meet?</label> <span class="pun"><?php print ($new->getError($whereItHappendError));?></span>
 
-				<input type="text" class="form-control" name="where"
+				<input type="text" class="form-control" name="whereItHappend"
 					placeholder="Elektrozavodsk"
-					value="<?php print(htmlentities($new->getWhere(), ENT_QUOTES, "UTF-8"));?>">
+					value="<?php print(htmlentities($new->getwhereItHappend(), ENT_QUOTES, "UTF-8"));?>">
 
 			</div>
 			<div class="form-group">
