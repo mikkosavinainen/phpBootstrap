@@ -37,26 +37,27 @@
 		<div class="container">
 			<h1>Work in progress</h1>
 			<?php
-				try {
-					require_once 'newPDO.php';
+			try {
+				require_once 'newPDO.php';
+				
+				$sqlHandling = new newPDO ();
+				$rows = $sqlHandling->allSpottings ();
+				$length = count ( $rows );
+				foreach ( $rows as $spotting ) {
+					print ("<form action='' method='post'> <input type='hidden' name='id' value='dynamicIdFromDb'><p>What Happend: " . $spotting->getWhatHappend ()) ;
+					print ("<br>Where: " . $spotting->getwhereItHappend ()) ;
+					print ("<button type='submit' name='delete' class='btn btn-danger'>Delete</button>") ;
+					print ("<button type='submit' name='showMore' class='btn btn-success'>Show more</button>" . "</p>\n </form>") ;
 					
-					$sqlHandling = new newPDO();
-					$rows = $sqlHandling->allSpottings();
-					
-					foreach ($rows as $spotting) {
-						print ("<p>Name: " . $spotting->getName());
-						print ("<br>Where: " . $spotting->getwhereItHappend());
-						print ("<br>Role: " . $spotting->getRole());
-						print ("<br>What Happend: " . $spotting->getWhatHappend());
-						print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
-						print ("<br>Language: " . $spotting->getLanguage() . "</p>\n");
-					}
-					
-				} catch (Exception $e) {
-					header("location: error.php?page=listing&error=" . $e->getMessage());
-					exit();
+					// print ("<p>Name: " . $spotting->getName());
+					// print ("<br>Role: " . $spotting->getRole());
+					// print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
+					// print ("<br>Language: " . $spotting->getLanguage() . "</p>\n");
 				}
-
+			} catch ( Exception $e ) {
+				header ( "location: error.php?page=listing&error=" . $e->getMessage () );
+				exit ();
+			}
 			?>
 		</div>
 	</div>
