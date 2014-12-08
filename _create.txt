@@ -1,0 +1,13 @@
+create database spottings;
+use spottings;
+
+CREATE TABLE spotting(
+spotting_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+name varchar(30),
+whereItHappend varchar(50) NOT NULL,
+specialCharacteristics varchar(100),
+role varchar(6) NOT NULL,
+language varchar(20),
+whatHappend varchar(500) NOT NULL,
+PRIMARY KEY (spotting_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
