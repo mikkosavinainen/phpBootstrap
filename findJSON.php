@@ -13,9 +13,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <script type="text/javascript">	
-  function findName() {
+  function findByName() {
     var json = {"name" : document.form.name.value };
-	console.log("DEBUGGGGGGGGGGGGGGGGGGGG");
+	console.log(json);
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange=function() {
@@ -81,7 +81,7 @@
 			<input type="text" id="name" name="name">
 			<!-- onClick kertoo, että painikkeen painalluksen käsittelee haeNimella-funktio -->
 			<input type="button" id="get" name="get" value="Hae"
-				onClick="findName()">
+				onClick="findByName()">
 		</form>
 		<br>
 		<div id="list"></div>
