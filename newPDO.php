@@ -17,6 +17,70 @@ class newPDO {
 	function getCount() {
 		return $this->count;
 	}
+	
+	public function deleteById($deleteId) {
+		$sql = "DELETE FROM spottings WHERE id=" . $deleteId;
+
+		
+// 		if (! $statement = $this->db->prepare($sql)) {
+// 			$error = $this->db->errorInfo();
+			
+// 			throw new PDOException($error [2], $error[1]);
+// 		}
+		
+// 		if (! $statement->execute()) {
+// 			$error = $statement->errorInfo();
+// 			throw new PDOException ( $error [2], $error [1] );
+// 		}
+		
+
+	}
+	
+	public function listById($listId) {
+		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
+				FROM spotting
+				WHERE spotting_id = " . $listId;
+	
+		// Prepare statement
+		if (! $statement = $this->db->prepare ( $sql )) {
+			$error = $this->db->errorInfo ();
+				
+			throw new PDOException ( $error [2], $error [1] );
+		}
+	
+		// Run statement
+		if (! $statement->execute ()) {
+			$error = $statement->errorInfo ();
+				
+			throw new PDOException ( $error [2], $error [1] );
+		}
+	
+		$result = array ();
+	
+		while ( $row = $statement->fetchObject () ) {
+			// Create object from result
+			$new = new newSpotting ();
+				
+			$new->setspottingId ( $row->spotting_id );
+			$new->setName ( utf8_encode ( $row->name ) );
+			$new->setwhereItHappend ( utf8_encode ( $row->whereItHappend ) );
+			$new->setSpecialCharacteristics ( $row->specialCharacteristics );
+			$new->setLanguage ( $row->language );
+			$new->setWhatHappend ( utf8_encode ( $row->whatHappend ) );
+			$new->setRole ( $row->role );
+				
+			$result [] = $new;
+		}
+	
+		$this->count = $statement->rowCount ();
+	
+		return $result;
+	}
+	
+	
+	
+	
+	
 	public function allSpottings() {
 		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
 				FROM spotting";

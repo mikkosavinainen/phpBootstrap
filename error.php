@@ -31,9 +31,8 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Coming soon</h1>
-			<p>Other assignment</p>
-
+			<h1>ERROR</h1>
+			<p>Oops..</p>
 		</div>
 	</div>
 

@@ -1,29 +1,14 @@
 <?php
 require_once 'new.php';
 
-session_start ();
-
-if (isset ( $_POST ["delete"] )) {
-	$id = $_POST ["id"];
-	setcookie ( "id", $id, time () + 60 * 60 * 24 * 7 );
-	try {
-		require_once 'newPDO.php';
-		$sqlHandling = new newPDO ();
-		$sqlHandling->deleteById ( $deleteId);
-	} catch ( Exception $e ) {
-		header ( "location: error.php?page=listing&error=" . $e->getMessage () );
-		exit ();
-	}
-	
+if (isset ( $_POST ["back"] )) {
 	header ( "location: all.php" );
-} elseif (isset ( $_POST ["showMore"] )) {
-	$id = $_POST ["id"];
-	setcookie ( "id", $id, time () + 60 * 60 * 24 * 7 );
-	header ( "location: showMore.php?id=$id" );
+} elseif (isset ( $_POST ["delete"] )) {
+	header ( "location: index.php" );
 } else {
 }
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,30 +34,28 @@ if (isset ( $_POST ["delete"] )) {
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li><a href="index.php">Main</a></li>
+					<li class="active"><a href="#">Main</a></li>
 					<li><a href="addNew.php">Add new</a></li>
-					<li class="active"><a href="#">Show all</a></li>
+					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
 					<li><a href="find.php">Find</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-
 	
-			<?php
-			if (isset ( $_COOKIE ["id"] )) {
-				print ("<p>Welcome " . $_COOKIE ["id"] . "</p>") ;
-				$deleteId = $_COOKIE ["id"];
-				print ("<p>delete id " . $deleteId . "</p>") ;
-			} else {
-				print ("<p>Welcome Unknown Internet Warrior</p>") ;
-			}
-			
-			?>
-	
-	
-	<div class="jumbotron">
+		<?php
+		if (isset ( $_COOKIE ["id"] )) {
+			print ("<p>Welcome " . $_COOKIE ["id"] . "</p>") ;
+			$listId = $_COOKIE ["id"];
+			print ("<p>listaus id " . $listId . "</p>") ;
+		} else {
+			print ("<p>Welcome Unknown Internet Warrior</p>") ;
+		}
+		
+		?>
+		
+			<div class="jumbotron">
 		<div class="container">
 			<h1>Hero and bandit spottings</h1>
 			<?php
@@ -80,20 +63,19 @@ if (isset ( $_POST ["delete"] )) {
 				require_once 'newPDO.php';
 				
 				$sqlHandling = new newPDO ();
-				$rows = $sqlHandling->allSpottings ();
+				$rows = $sqlHandling->listById ( $listId );
 				$length = count ( $rows );
 				foreach ( $rows as $spotting ) {
 					$selectId = $spotting->getspottingId ();
 					print ("<form action='' method='post'> <input type='hidden' name='id' value='$selectId'><p>What Happend: " . $spotting->getWhatHappend ()) ;
 					print ("<br>Where: " . $spotting->getwhereItHappend ()) ;
-					print ("<button type='submit' name='delete' class='btn btn-danger'>Delete</button>") ;
-					print ("<button type='submit' name='showMore' class='btn btn-success'>Show more</button>" . "</p>\n </form>") ;
-					
-					// print ("<p>Name: " . $spotting->getName());
-					// print ("<br>Role: " . $spotting->getRole());
-					// print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
-					// print ("<br>Language: " . $spotting->getLanguage() . "</p>\n");
+					print ("<p>Name: " . $spotting->getName());
+					print ("<br>Role: " . $spotting->getRole());
+					print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
+					print ("<br>Language: " . $spotting->getLanguage());
+					print ("<button type='submit' name='back' class='btn btn-success'>Back</button>" . "</p>\n </form>") ;
 				}
+				
 			} catch ( Exception $e ) {
 				header ( "location: error.php?page=listing&error=" . $e->getMessage () );
 				exit ();
@@ -101,7 +83,6 @@ if (isset ( $_POST ["delete"] )) {
 			?>
 		</div>
 	</div>
-
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

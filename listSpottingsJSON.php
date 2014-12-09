@@ -42,8 +42,7 @@ function listSpottings(response) {
         "<br>language: " + resp[i].language +
         "<br>what happend: " + resp[i].whatHappend + "</p>";
     }
-
-    // Laitetaan taulukon kÃ¤sittelyn tuloksena tullut teksti HTML-elementtiin
+    
     document.getElementById("list").innerHTML = text;
 }
 </script>
@@ -79,7 +78,7 @@ function listSpottings(response) {
 
 		<div id="list"></div>
 		<p>
-			<a href="index.php">Takaisin</a>
+			<a href="index.php">index.php</a>
 		</p>
 
 	</article>
