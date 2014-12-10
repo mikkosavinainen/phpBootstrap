@@ -13,6 +13,9 @@ if (isset ( $_SESSION ["addingNew"] )) {
 }
 
 if (isset ( $_POST ["submit"] )) {
+	require_once 'newPDO.php';
+	$databaseHandling = new newPDO();
+	$id = $databaseHandling->addSpotting($new);
 	unset ( $_SESSION ["addingNew"] );
 	header ( "location: success.php" ); // Tässä vaiheessa pitäisi mennä tietokantaan
 } elseif (isset ( $_POST ["cancel"] )) {

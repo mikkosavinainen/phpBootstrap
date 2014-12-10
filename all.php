@@ -6,14 +6,20 @@ session_start ();
 if (isset ( $_POST ["delete"] )) {
 	$id = $_POST ["id"];
 	setcookie ( "id", $id, time () + 60 * 60 * 24 * 7 );
-	try {
-		require_once 'newPDO.php';
-		$sqlHandling = new newPDO ();
-		$sqlHandling->deleteById ( $deleteId);
-	} catch ( Exception $e ) {
-		header ( "location: error.php?page=listing&error=" . $e->getMessage () );
-		exit ();
-	}
+	
+		//require_once 'newPDO.php';
+		//$sqlHandling = new newPDO ();
+	$dbkyrpa = new PDO("mysql:host=localhost;dbname=spottings", "root", "salainen");
+	$sql = "DELETE FROM spotting WHERE spotting_id=" . $id;
+	$dbkyrpa->exec($sql);
+	
+	$perse = "seppo";
+// 	} catch ( Exception $e ) {
+// 		$errori = $e->getMessage();
+// 		setcookie("errori", $errori, time () + 60 * 60);
+// 		header ( "location: error.php?page=listing&error=" . $e->getMessage () );
+// 		exit ();
+// 	}
 	
 	header ( "location: all.php" );
 } elseif (isset ( $_POST ["showMore"] )) {
@@ -21,6 +27,8 @@ if (isset ( $_POST ["delete"] )) {
 	setcookie ( "id", $id, time () + 60 * 60 * 24 * 7 );
 	header ( "location: showMore.php?id=$id" );
 } else {
+	$perse = "";
+	$sql = "de nada";
 }
 
 ?>
@@ -64,7 +72,7 @@ if (isset ( $_POST ["delete"] )) {
 			if (isset ( $_COOKIE ["id"] )) {
 				print ("<p>Welcome " . $_COOKIE ["id"] . "</p>") ;
 				$deleteId = $_COOKIE ["id"];
-				print ("<p>delete id " . $deleteId . "</p>") ;
+				print ("<p>delete id " . $deleteId . " Perse " . $perse . "</p>") ;
 			} else {
 				print ("<p>Welcome Unknown Internet Warrior</p>") ;
 			}

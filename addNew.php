@@ -23,7 +23,7 @@ if (isset ( $_POST ["next"] )) {
 		try {
 			require_once 'newPDO.php';
 			$databaseHandling = new newPDO();
-			$id = $databaseHandling->addSpotting($new);
+			//$id = $databaseHandling->addSpotting($new);
 			
 			// Set id from session to add id
 			$_SESSION["addingNew"]->setspottingId($id);

@@ -33,6 +33,14 @@
 		<div class="container">
 			<h1>ERROR</h1>
 			<p>Oops..</p>
+			<?php 
+			if (isset ( $_COOKIE ["errori"] )) {
+				print("Cookie on laitettu");
+				print_r($_COOKIE);
+			} else {
+				print("Cookie ei ole laitettu'd");
+			}
+			?>
 		</div>
 	</div>
 

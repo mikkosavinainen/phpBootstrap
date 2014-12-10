@@ -1,5 +1,5 @@
 <?php
-class newSpotting {
+class newSpotting implements JsonSerializable {
 	public static $errorList = array (
 			- 1 => "Unknown error",
 			0 => "",
@@ -38,6 +38,19 @@ class newSpotting {
 	private $language;
 	private $whatHappend;
 	private $spottingId; // Added because of database
+	
+	public function jsonSerialize() {
+		return [
+				"name" => $this->name,
+				"whereItHappend" => $this->whereItHappend,
+				"specialCharacteristics" => $this->specialCharacteristics,
+				"role" => $this->role,
+				"language" => $this->language,
+				"whatHappend" => $this->whatHappend,
+				"spottingId" => $this->spottingId
+		];
+	}
+	
 	function __construct($name = "", $whereItHappend = "", $specialCharacteristics = "", $role = "", $language = "", $whatHappend = "", $spottingId = 0) {
 		$this->name = trim ( $name );
 		$this->whereItHappend = trim ( $whereItHappend );
