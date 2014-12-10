@@ -20,6 +20,7 @@ class newPDO {
 	
 	public function deleteById($deleteId) {
 		$sql = "DELETE FROM spottings WHERE id=" . $deleteId;
+		print($deleteId);
 
 		
 // 		if (! $statement = $this->db->prepare($sql)) {
