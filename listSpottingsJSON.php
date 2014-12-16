@@ -54,7 +54,7 @@ function listSpottings(response) {
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
@@ -63,7 +63,7 @@ function listSpottings(response) {
 					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
 					<li><a href="findJSON.php">Find JSON</a></li>
-					<li class="active"><a href="listSpottings.php">Show all JSON</a></li>
+					<li class="active"><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>
@@ -71,20 +71,21 @@ function listSpottings(response) {
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Coming soon</h1>
-			<p>Other assignment</p>
+			<h1>All Spottings listed with JSON</h1>
+			<p>
+				<div id="list"></div>
+			</p>
+
+
 
 		</div>
 	</div>
 
 	<!-- just testing -->
 	<article>
-		<h2>All Spottings</h2>
+		<h2></h2>
 
-		<div id="list"></div>
-		<p>
-			<a href="index.php">index.php</a>
-		</p>
+
 
 	</article>
 
