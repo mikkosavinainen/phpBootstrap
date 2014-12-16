@@ -1,15 +1,14 @@
 <?php
-//Tutkitaan, onko lukittuna olevaa keksiä
-if (isset($_COOKIE["saveName"])) {
-	
+// Tutkitaan, onko lukittuna olevaa keksiä
+if (isset ( $_COOKIE ["saveName"] )) {
 }
-//Onko painettu save-nimistä painiketta
-if (isset($_POST["save"])) {
-	$givenName = $_POST["name"];
-		setcookie("saveName", $givenName,time() + 60*60*24*7); // vikko time() + 60*60*24*7);
-		//Siirrytään etusivulle
-		header("location: index.php?name=$givenName");
-		exit;
+// Onko painettu save-nimistä painiketta
+if (isset ( $_POST ["save"] )) {
+	$givenName = $_POST ["name"];
+	setcookie ( "saveName", $givenName, time () + 60 * 60 * 24 * 7 ); // vikko time() + 60*60*24*7);
+	                                                       // Siirrytään etusivulle
+	header ( "location: index.php?name=$givenName" );
+	exit ();
 }
 ?>
 <!DOCTYPE html>
@@ -33,15 +32,16 @@ if (isset($_POST["save"])) {
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
 					<li><a href="index.php">Main</a></li>
 					<li><a href="addNew.php">Add new</a></li>
 					<li><a href="all.php">Show all</a></li>
-					<li class="active"><a href="#">Settings</a></li>
-					<li><a href="find.php">Find</a></li>
+					<li class="active"><a href="settings.php">Settings</a></li>
+					<li><a href="findJSON.php">Find JSON</a></li>
+					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>
@@ -52,8 +52,8 @@ if (isset($_POST["save"])) {
 			<form action="settings.php" method="post">
 				<div class="form-group">
 					<label>Name:</label> <input type="text" class="form-control"
-						name="name" placeholder="John Doe" value="">
-						<input type="submit" name="save" value="Save" />
+						name="name" placeholder="John Doe" value=""> <input type="submit"
+						name="save" value="Save" />
 				</div>
 
 			</form>

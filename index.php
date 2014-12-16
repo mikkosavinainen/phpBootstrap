@@ -19,15 +19,16 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Main</a></li>
+					<li class="active"><a href="index.php">Main</a></li>
 					<li><a href="addNew.php">Add new</a></li>
 					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
-					<li><a href="find.php">Find</a></li>
+					<li><a href="findJSON.php">Find JSON</a></li>
+					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>

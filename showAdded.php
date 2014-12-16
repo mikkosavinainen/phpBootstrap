@@ -2,22 +2,18 @@
 require_once "new.php";
 
 session_start ();
-
-// Tutkitaan, onko istunnossa elokuvaa
 if (isset ( $_SESSION ["addingNew"] )) {
-	// Otetaan istunnosta olio
 	$new = $_SESSION ["addingNew"];
 } else {
-	// Tehdään tyhjä leffa
 	$new = new newSpotting ();
 }
 
 if (isset ( $_POST ["submit"] )) {
 	require_once 'newPDO.php';
-	$databaseHandling = new newPDO();
-	$id = $databaseHandling->addSpotting($new);
+	$databaseHandling = new newPDO ();
+	$id = $databaseHandling->addSpotting ( $new );
 	unset ( $_SESSION ["addingNew"] );
-	header ( "location: success.php" ); // Tässä vaiheessa pitäisi mennä tietokantaan
+	header ( "location: success.php" );
 } elseif (isset ( $_POST ["cancel"] )) {
 	unset ( $_SESSION ["addingNew"] );
 	header ( "location: index.php" );
@@ -49,7 +45,7 @@ if (isset ( $_POST ["submit"] )) {
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
@@ -61,7 +57,7 @@ if (isset ( $_POST ["submit"] )) {
 
 	<div class="jumbotron">
 		<div class="container">
-			<h2>Summary submitted by <?php
+			<h2>Summary of submitted information by <?php
 			if (isset ( $_COOKIE ["saveName"] )) {
 				print ($_COOKIE ["saveName"]) ;
 			} else {
@@ -110,7 +106,7 @@ if (isset ( $_POST ["submit"] )) {
 				</form>
 			</div>
 		</div>
-		
+
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">

@@ -26,7 +26,7 @@ header('Refresh: 5; URL=index.php');
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
@@ -46,7 +46,7 @@ header('Refresh: 5; URL=index.php');
 			}
 			?></h2>
 			<div class="container">
-				<p>redirect in five seconds // Yritin saada tämän tilalle modalia mutta ei vielä onnistunut</p>
+				<p>redirect in five seconds</p>
 			</div>
 		</div>
 	</div>

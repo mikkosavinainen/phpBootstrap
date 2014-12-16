@@ -41,8 +41,6 @@
         "<br>language: " + resp[i].language +
         "<br>what happend: " + resp[i].whatHappend + "</p>";
     }
-
-    // Laitetaan taulukon käsittelyn tuloksena tullut teksti HTML-elementtiin
     document.getElementById("list").innerHTML = text;
 }
 </script>
@@ -54,7 +52,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
@@ -62,7 +60,8 @@
 					<li><a href="addNew.php">Add new</a></li>
 					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
-					<li class="active"><a href="#">Find using JSON</a></li>
+					<li class="active"><a href="findJSON.php">Find JSON</a></li>
+					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>

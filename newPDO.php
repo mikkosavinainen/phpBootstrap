@@ -3,7 +3,7 @@ require_once "new.php";
 class newPDO {
 	private $db;
 	private $count;
-	function __construct($dsn = "mysql:host=localhost;dbname=spottings", $username = "root", $password = "salainen") {
+	function __construct($dsn = "mysql:host=localhost;dbname=a1300899", $username = "root", $password = "salainen") {
 		// Connect to db
 		$this->db = new PDO ( $dsn, $username, $password );
 		
@@ -17,32 +17,31 @@ class newPDO {
 	function getCount() {
 		return $this->count;
 	}
-	
 	public function listById($listId) {
 		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
 				FROM spotting
 				WHERE spotting_id = " . $listId;
-	
+		
 		// Prepare statement
 		if (! $stmt = $this->db->prepare ( $sql )) {
 			$error = $this->db->errorInfo ();
-				
+			
 			throw new PDOException ( $error [2], $error [1] );
 		}
-	
+		
 		// Run statement
 		if (! $stmt->execute ()) {
 			$error = $stmt->errorInfo ();
-				
+			
 			throw new PDOException ( $error [2], $error [1] );
 		}
-	
+		
 		$result = array ();
-	
+		
 		while ( $row = $stmt->fetchObject () ) {
 			// Create object from result
 			$new = new newSpotting ();
-				
+			
 			$new->setspottingId ( $row->spotting_id );
 			$new->setName ( utf8_encode ( $row->name ) );
 			$new->setwhereItHappend ( utf8_encode ( $row->whereItHappend ) );
@@ -50,19 +49,14 @@ class newPDO {
 			$new->setLanguage ( $row->language );
 			$new->setWhatHappend ( utf8_encode ( $row->whatHappend ) );
 			$new->setRole ( $row->role );
-				
+			
 			$result [] = $new;
 		}
-	
+		
 		$this->count = $stmt->rowCount ();
-	
+		
 		return $result;
 	}
-	
-	
-	
-	
-	
 	public function allSpottings() {
 		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend FROM spotting";
 		
@@ -87,8 +81,8 @@ class newPDO {
 			$new = new newSpotting ();
 			
 			$new->setspottingId ( $row->spotting_id );
-			$new->setName ($row->name );
-			$new->setwhereItHappend ($row->whereItHappend );
+			$new->setName ( $row->name );
+			$new->setwhereItHappend ( $row->whereItHappend );
 			$new->setSpecialCharacteristics ( $row->specialCharacteristics );
 			$new->setLanguage ( $row->language );
 			$new->setWhatHappend ( $row->whatHappend );
@@ -101,7 +95,7 @@ class newPDO {
 		
 		return $result;
 	}
-	public function getAll($name) {
+	public function findByName($name) {
 		$sql = "SELECT spotting_id, name, whereItHappend, specialCharacteristics, role, language, whatHappend
 				FROM spotting
 				WHERE name like :name";

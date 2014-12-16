@@ -1,3 +1,6 @@
+<?php
+header('Refresh: 5; URL=index.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +22,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
@@ -33,14 +36,9 @@
 		<div class="container">
 			<h1>ERROR</h1>
 			<p>Oops..</p>
-			<?php 
-			if (isset ( $_COOKIE ["errori"] )) {
-				print("Cookie on laitettu");
-				print_r($_COOKIE);
-			} else {
-				print("Cookie ei ole laitettu'd");
-			}
-			?>
+			<div class="container">
+				<p>redirect in five seconds</p>
+			</div>
 		</div>
 	</div>
 

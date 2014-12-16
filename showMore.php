@@ -30,15 +30,16 @@ if (isset ( $_POST ["back"] )) {
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">DayZ hero or bandit?</a>
+				<a class="navbar-brand" href="index.php">DayZ hero or bandit?</a>
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Main</a></li>
+					<li class="active"><a href="index.php">Main</a></li>
 					<li><a href="addNew.php">Add new</a></li>
 					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
-					<li><a href="find.php">Find</a></li>
+					<li><a href="findJSON.php">Find JSON</a></li>
+					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>
@@ -57,7 +58,7 @@ if (isset ( $_POST ["back"] )) {
 		
 			<div class="jumbotron">
 		<div class="container">
-			<h1>Hero and bandit spottings</h1>
+			
 			<?php
 			try {
 				require_once 'newPDO.php';
@@ -67,15 +68,15 @@ if (isset ( $_POST ["back"] )) {
 				$length = count ( $rows );
 				foreach ( $rows as $spotting ) {
 					$selectId = $spotting->getspottingId ();
-					print ("<form action='' method='post'> <input type='hidden' name='id' value='$selectId'><p>What Happend: " . $spotting->getWhatHappend ()) ;
+					print ("<h1>Detailed information of <b>" . $spotting->getRole () . "</b></h1>") ;
+					print ("<form action='' method='post'> <input type='hidden' name='id' value='$selectId'>
+							<p>What Happend: " . $spotting->getWhatHappend ()) ;
 					print ("<br>Where: " . $spotting->getwhereItHappend ()) ;
-					print ("<p>Name: " . $spotting->getName());
-					print ("<br>Role: " . $spotting->getRole());
-					print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics());
-					print ("<br>Language: " . $spotting->getLanguage());
-					print ("<button type='submit' name='back' class='btn btn-success'>Back</button>" . "</p>\n </form>") ;
+					print ("<p>Name: " . $spotting->getName ()) ;
+					print ("<br>Special Charasteristics: " . $spotting->getSpecialCharacteristics ()) ;
+					print ("<br>Language: " . $spotting->getLanguage ()) ;
+					print ("<br><button type='submit' name='back' class='btn btn-success'>Back</button>" . "</p>\n </form>") ;
 				}
-				
 			} catch ( Exception $e ) {
 				header ( "location: error.php?page=listing&error=" . $e->getMessage () );
 				exit ();

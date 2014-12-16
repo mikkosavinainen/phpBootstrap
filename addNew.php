@@ -5,11 +5,8 @@ session_start ();
 
 if (isset ( $_POST ["next"] )) {
 	$new = new newSpotting ( $_POST ["name"], $_POST ["whereItHappend"], $_POST ["specialCharacteristics"], $_POST ["role"], $_POST ["language"], $_POST ["whatHappend"] );
-	
-	
-	// print_r ( $new ); //debuginfo oliosta
+	// print_r ( $new ); //debuginfo
 	$_SESSION ["addingNew"] = $new;
-
 	
 	$nameError = $new->checkName ();
 	$whereItHappendError = $new->checkWhereItHappend ();
@@ -22,35 +19,31 @@ if (isset ( $_POST ["next"] )) {
 		
 		try {
 			require_once 'newPDO.php';
-			$databaseHandling = new newPDO();
-			//$id = $databaseHandling->addSpotting($new);
+			$databaseHandling = new newPDO ();
+			// $id = $databaseHandling->addSpotting($new);
 			
 			// Set id from session to add id
-			$_SESSION["addingNew"]->setspottingId($id);
-			
-		} catch (Exception $e) {
-			session_write_close();
+			$_SESSION ["addingNew"]->setspottingId ( $id );
+		} catch ( Exception $e ) {
+			session_write_close ();
 			
 			// Redirect to error page with error message
-			header("location: error.php?page=" . urlencode("Adding") . "&error" . $e->getMessage() );
-			exit();
+			header ( "location: error.php?page=" . urlencode ( "Adding" ) . "&error" . $e->getMessage () );
+			exit ();
 		}
-	
+		
 		session_write_close ();
-		header("location: showAdded.php");
+		header ( "location: showAdded.php" );
 		exit ();
 	}
-
-	
-	
 } elseif (isset ( $_POST ["cancel"] )) {
 	unset ( $_SESSION ["addingNew"] );
 	header ( "location: index.php" );
 	exit ();
 } else {
 	
-	if (isset($_SESSION["addingNew"])) {
-		$new = $_SESSION["addingNew"];
+	if (isset ( $_SESSION ["addingNew"] )) {
+		$new = $_SESSION ["addingNew"];
 		
 		$nameError = $new->checkName ();
 		$whereItHappendError = $new->checkwhereItHappend ();
@@ -58,8 +51,6 @@ if (isset ( $_POST ["next"] )) {
 		$role = $new->checkRole ();
 		$languageError = $new->checkLanguage ();
 		$whatHappendError = $new->checkWhatHappend ();
-		
-		
 	} else {
 		$new = new newSpotting ();
 		$nameError = 0;
@@ -69,7 +60,6 @@ if (isset ( $_POST ["next"] )) {
 		$languageError = 0;
 		$whatHappendError = 0;
 	}
-
 }
 
 ?>
@@ -105,10 +95,11 @@ if (isset ( $_POST ["next"] )) {
 			<div>
 				<ul class="nav navbar-nav">
 					<li><a href="index.php">Main</a></li>
-					<li class="active"><a href="#">Add new</a></li>
+					<li class="active"><a href="addNew.php">Add new</a></li>
 					<li><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
-					<li><a href="find.php">Find</a></li>
+					<li><a href="findJSON.php">Find JSON</a></li>
+					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
 				</ul>
 			</div>
 		</div>
