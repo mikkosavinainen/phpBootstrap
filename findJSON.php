@@ -69,25 +69,18 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Coming soon</h1>
-			<p>Other assignment</p>
-
+			<h1>Find reports by player name</h1>
+			<p>
+			
+			
+			<form action="" method="post" name="form">
+				<input type="text" id="name" name="name"> <input type="button"
+					id="get" name="get" value="Find" onClick="findByName()">
+			</form>
+			<br>
+			<div id="list"></div>
+			</p>
 		</div>
-		
-			<article>
-		<h2>Hae leffa</h2>
-		<form action="" method="post" name="form">
-			<input type="text" id="name" name="name">
-			<!-- onClick kertoo, että painikkeen painalluksen käsittelee haeNimella-funktio -->
-			<input type="button" id="get" name="get" value="Hae"
-				onClick="findByName()">
-		</form>
-		<br>
-		<div id="list"></div>
-		<p>
-			<a href="index.php">Takaisin</a>
-		</p>
-	</article>
 	</div>
 
 
