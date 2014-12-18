@@ -20,7 +20,6 @@ if (isset ( $_POST ["next"] )) {
 		try {
 			require_once 'newPDO.php';
 			$databaseHandling = new newPDO ();
-			// $id = $databaseHandling->addSpotting($new);
 			
 			// Set id from session to add id
 			$_SESSION ["addingNew"]->setspottingId ( $id );
@@ -61,29 +60,24 @@ if (isset ( $_POST ["next"] )) {
 		$whatHappendError = 0;
 	}
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Share your bandit and hero spottings</title>
 <meta name="author" content="Mikko Savinainen">
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
 <style>
 .pun {
 	color: red;
 }
 </style>
-
 </head>
 
 <body>
@@ -105,19 +99,15 @@ if (isset ( $_POST ["next"] )) {
 		</div>
 	</nav>
 
-
-
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
 
-
 	<div class="container">
 		<h2>Encounter</h2>
 		<form role="form" action="addNew.php" method="post">
-
 			<div class="radio">
 				<label><input type="radio" name="role"
 					<?php if($new->getRole()=="hero")?> value="hero" checked="checked">Hero</label>
@@ -126,14 +116,11 @@ if (isset ( $_POST ["next"] )) {
 				<label><input type="radio" name="role"
 					<?php if($new->getRole()=="bandit")?> value="bandit">Bandit</label>
 			</div>
-
 			<div class="form-group">
 				<label>Where did you meet?</label> <span class="pun"><?php print ($new->getError($whereItHappendError));?></span>
-
 				<input type="text" class="form-control" name="whereItHappend"
 					placeholder="Elektrozavodsk"
 					value="<?php print(htmlentities($new->getwhereItHappend(), ENT_QUOTES, "UTF-8"));?>">
-
 			</div>
 			<div class="form-group">
 				<label>Special characteristics:</label> <span class="pun"><?php print ($new->getError($specialCharacteristicsError))?></span>
@@ -141,37 +128,28 @@ if (isset ( $_POST ["next"] )) {
 					name="specialCharacteristics"
 					placeholder="Red pants, gas mask, shotgun"
 					value="<?php print(htmlentities($new->getSpecialCharacteristics(), ENT_QUOTES, "UTF-8"));?>">
-
 			</div>
 			<div class="form-group">
 				<label>Name of encountered player:</label> <span class="pun"><?php print($new->getError($nameError));?></span>
 				<input type="text" class="form-control" name="name"
 					placeholder="//xXx\\AlexSch10"
 					value="<?php print(htmlentities($new->getName(), ENT_QUOTES, "UTF-8"));?>">
-
 			</div>
 			<div class="form-group">
 				<label>Language</label> <span class="pun"><?php print($new->getError($languageError))?></span>
 				<input type="text" class="form-control" name="language"
 					placeholder="ENG / FI / SWEDISH etc."
 					value="<?php print(htmlentities($new->getLanguage(), ENT_QUOTES, "UTF-8"));?>">
-
 			</div>
 			<div class="form-group">
 				<label for="comment">What happend:</label> <span class="pun"><?php print ($new->getError($whatHappendError))?></span>
 				<textarea class="form-control" rows="5" id="comment"
 					name="whatHappend"
 					placeholder="Try to give clear picture what happend"><?php print(htmlentities($new->getWhatHappend(), ENT_QUOTES, "UTF-8"));?></textarea>
-
 			</div>
-
-
-
 			<button type="submit" name="cancel" class="btn btn-danger">Cancel</button>
 			<button type="submit" name="next" class="btn btn-success">Next</button>
-
 		</form>
 	</div>
-
 </body>
 </html>

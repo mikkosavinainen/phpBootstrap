@@ -34,9 +34,9 @@ if (isset ( $_POST ["back"] )) {
 			</div>
 			<div>
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.php">Main</a></li>
+					<li><a href="index.php">Main</a></li>
 					<li><a href="addNew.php">Add new</a></li>
-					<li><a href="all.php">Show all</a></li>
+					<li class="active"><a href="all.php">Show all</a></li>
 					<li><a href="settings.php">Settings</a></li>
 					<li><a href="findJSON.php">Find JSON</a></li>
 					<li><a href="listSpottingsJSON.php">Show all JSON</a></li>
@@ -47,11 +47,9 @@ if (isset ( $_POST ["back"] )) {
 	
 		<?php
 		if (isset ( $_COOKIE ["id"] )) {
-			print ("<p>Welcome " . $_COOKIE ["id"] . "</p>") ;
 			$listId = $_COOKIE ["id"];
-			print ("<p>listaus id " . $listId . "</p>") ;
 		} else {
-			print ("<p>Welcome Unknown Internet Warrior</p>") ;
+			// debug
 		}
 		
 		?>

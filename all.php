@@ -12,7 +12,6 @@ if (isset ( $_POST ["delete"] )) {
 		$sql = "DELETE FROM spotting WHERE spotting_id=" . $id;
 		$databaseHandling->exec ( $sql );
 		
-// 		$perse = "seppo";
 	} catch ( Exception $e ) {
 		$errori = $e->getMessage ();
 		setcookie ( "errori", $errori, time () + 60 * 60 );
@@ -26,8 +25,7 @@ if (isset ( $_POST ["delete"] )) {
 	setcookie ( "id", $id, time () + 60 * 60 * 24 * 7 );
 	header ( "location: showMore.php?id=$id" );
 } else {
-// 	$perse = "";
-// 	$sql = "de nada";
+	//debug
 }
 
 ?>
@@ -46,8 +44,6 @@ if (isset ( $_POST ["delete"] )) {
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-
-
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -66,20 +62,6 @@ if (isset ( $_POST ["delete"] )) {
 			</div>
 		</div>
 	</nav>
-
-	
-			<?php
-			// if (isset ( $_COOKIE ["id"] )) {
-			// print ("<p>Welcome " . $_COOKIE ["id"] . "</p>") ;
-			// $deleteId = $_COOKIE ["id"];
-			// print ("<p>delete id " . $deleteId . " Perse " . $perse . "</p>") ;
-			// } else {
-			// print ("<p>Welcome Unknown Internet Warrior</p>") ;
-			// }
-			
-			// 			?>
-	
-	
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Hero and bandit spottings</h1>

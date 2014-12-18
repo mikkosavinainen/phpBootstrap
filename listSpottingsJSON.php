@@ -72,23 +72,9 @@ function listSpottings(response) {
 	<div class="jumbotron">
 		<div class="container">
 			<h1>All Spottings listed with JSON</h1>
-			<p>
 				<div id="list"></div>
-			</p>
-
-
-
 		</div>
 	</div>
-
-	<!-- just testing -->
-	<article>
-		<h2></h2>
-
-
-
-	</article>
-
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

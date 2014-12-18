@@ -1,12 +1,9 @@
 <?php
-// Tutkitaan, onko lukittuna olevaa keksiä
 if (isset ( $_COOKIE ["saveName"] )) {
 }
-// Onko painettu save-nimistä painiketta
 if (isset ( $_POST ["save"] )) {
 	$givenName = $_POST ["name"];
-	setcookie ( "saveName", $givenName, time () + 60 * 60 * 24 * 7 ); // vikko time() + 60*60*24*7);
-	                                                       // Siirrytään etusivulle
+	setcookie ( "saveName", $givenName, time () + 60 * 60 * 24 * 7 );
 	header ( "location: index.php?name=$givenName" );
 	exit ();
 }
@@ -26,8 +23,6 @@ if (isset ( $_POST ["save"] )) {
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-
-
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -59,8 +54,6 @@ if (isset ( $_POST ["save"] )) {
 			</form>
 		</div>
 	</div>
-
-
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

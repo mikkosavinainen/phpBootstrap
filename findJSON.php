@@ -44,10 +44,7 @@
     document.getElementById("list").innerHTML = text;
 }
 </script>
-
 </head>
-
-
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -82,7 +79,6 @@
 			</p>
 		</div>
 	</div>
-
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
